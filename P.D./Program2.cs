@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Linq;
@@ -76,21 +76,21 @@ namespace MS
         }
         //kasowanie wezla p.d.
     
-    public void PrintInOrder(NodeT node)
+    public void Wypisz(NodeT node)
     {
         if (node == null) {  
                 return; 
             }
   
 
-        PrintInOrder(node.lewe);
+        Wypisz(node.lewe);
         Console.Write(node.data + " ");
-        PrintInOrder(node.prawe);
+        Wypisz(node.prawe);
     }
-    public void PrintDrz()
+    public void Wypisz()
     {
         Console.WriteLine("Drzewo: ");
-        PrintInOrder(root);
+        Wypisz(root);
         Console.WriteLine();
     }
 
@@ -111,7 +111,7 @@ namespace MS
                 return root.prawe;
             else if (root.prawe == null)
                 return root.lewe;
-            root.data = MinValue(root.prawe);
+            root.data = Min(root.prawe);
 
             root.prawe = DeleteNode(root.prawe, root.data);
         }
@@ -119,15 +119,15 @@ namespace MS
         return root;
     }
 
-    private int MinValue(NodeT node)
+    private int Min(NodeT wezel)
     {
-        int minVal = node.data;
-        while (node.lewe != null)
+        int min = wezel.data;
+        while (wezel.lewe != null)
         {
-            minVal = node.lewe.data;
-            node = node.lewe;
+            min = wezel.lewe.data;
+            wezel = wezel.lewe;
         }
-        return minVal;
+        return min;
     }
     }
     class Program
@@ -142,9 +142,9 @@ namespace MS
             bst.Add(4);
             bst.Add(2);
             bst.Add(9);
-            bst.PrintDrz();
+            bst.Wypisz();
             bst.Delete(3);
-            bst.PrintDrz();
+            bst.Wypisz();
         }
     }
 }
