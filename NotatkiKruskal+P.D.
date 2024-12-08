@@ -1,0 +1,74 @@
+using System.Collections.Generic;
+using System.Linq;
+
+public class NodeG
+{
+    public int data;
+    public NodeG(int liczba)
+    {
+        this.data = liczba;
+    }
+}
+public class Edge
+{
+    public NodeG start;
+    public NodeG end;
+    public int weight;
+    public Edge(NodeG start, NodeG end, int weight)
+    {
+        this.start = start;
+        this.end = end;
+        this.weight = weight;
+    }
+}
+public class Graph
+{
+    List<NodeG> nodes = new List<NodeG>();
+    List<Edge> edges = new List<Edge>();
+}
+
+
+public class main
+{
+    void Add(Edge k)
+    {
+        if (!this.edges.Contains(k))
+        {
+            this.edges.Add(k);
+        }
+        if (!this.nodes.Contains(k.start))
+        {
+            this.nodes.add(k.start);
+        }
+        if (!this.edges.Contains(end))
+        {
+            this.edges.Add(end);
+        }
+        if (!this.nodes.Contains(k.end))
+        {
+            this.nodes.add(k.end);
+        }
+    }
+    int ileNowychWezlow(Edge k)
+    {
+        int wynik = 0;
+        if (!this.nodes.Contains(k.start))
+        {
+            wynik++;
+        }
+        if (!this.nodes.Contains(k.end))
+        {
+            wynik++;
+        }
+        return wynik;
+    }
+    Graf(Edge k)
+    {
+        this.Add(k);
+    }
+   void Join(Graf g)
+    {
+        foreach (var k in g.edges)
+            this.Add(g);
+    }
+}
