@@ -1,4 +1,6 @@
 using System.Runtime.InteropServices.JavaScript;
+using System.Text.Json.Serialization;
+using System.Xml.Linq;
 
 namespace WinFormsApp2
 {
@@ -9,7 +11,6 @@ namespace WinFormsApp2
             InitializeComponent();
         }
         private int[] tab1 = null;
-
         string ToString(int[] tab1)
         {
             string wynik = "";
@@ -21,17 +22,12 @@ namespace WinFormsApp2
         }
         private void GenTab(int rozmiar)
         {
-            tab1 = new int[rozmiar];
             Random random = new Random();
+            tab1 = new int[rozmiar];
             for (int i = 0; i < tab1.Length; i++)
             {
                 tab1[i] = random.Next(1, 101);
             }
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            GenTab(10);
-            label2.Text = ToString(tab1);
         }
         private void BubbleSort()
         {
@@ -46,29 +42,30 @@ namespace WinFormsApp2
                         tab1[j] = tab1[j + 1];
                         tab1[j + 1] = xd;
                     }
+
                 }
             }
         }
-        private void InsertSort()
+        public void InsertSort()
         {
-          for(int i = 0; i < tab1.Length; i++)
+            for (int i = 0; i < tab1.Length; i++)
             {
                 int k = tab1[i];
                 int j = i - 1;
                 while (j >= 0 && tab1[j] > k)
                 {
-                    tab1[j+1]= tab1[j];
+                    tab1[j + 1] = tab1[j];
                     j = j - 1;
                 }
                 tab1[j + 1] = k;
             }
-            
         }
-        private void QuickSort(int lewo, int prawo)
+
+        public void QuickSort(int lewo, int prawo)
         {
             int i = lewo;
             int j = prawo;
-            int pivot = tab1[(lewo+prawo)/2];
+            int pivot = tab1[(lewo + prawo) / 2];
             while (i <= j)
             {
                 while (tab1[i] < pivot)
@@ -97,8 +94,11 @@ namespace WinFormsApp2
                 QuickSort(i, prawo);
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
+            GenTab(10);
+            label5.Text = ToString(tab1);
             BubbleSort();
             label1.Text = ToString(tab1);
         }
@@ -111,6 +111,8 @@ namespace WinFormsApp2
 
         private void button3_Click(object sender, EventArgs e)
         {
+            GenTab(10);
+            label6.Text = ToString(tab1);
             InsertSort();
             label3.Text = ToString(tab1);
 
@@ -118,11 +120,28 @@ namespace WinFormsApp2
 
         private void button4_Click(object sender, EventArgs e)
         {
+            GenTab(10);
+            label7.Text = ToString(tab1);
             QuickSort(0, tab1.Length - 1);
             label4.Text = ToString(tab1);
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }
