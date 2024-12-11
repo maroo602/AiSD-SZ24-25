@@ -9,11 +9,15 @@ namespace WinFormsApp2
         public Form1()
         {
             InitializeComponent();
+            MessageBox.Show("Sortowanie");
+            label9.Text = "Sortowanie 5 metodami: Bubble, Insert, Quick, Counting, Merge.";
+            this.Text = "Sortowanie";
         }
+
         private int[] tab1 = null;
-        string ToString(int[] tab1)
+        private string ToString(int[] tab1)
         {
-            string wynik = "";
+            string wynik = " ";
             for (int i = 0; i < tab1.Length; i++)
             {
                 wynik += tab1[i] + " ";
@@ -42,11 +46,10 @@ namespace WinFormsApp2
                         tab1[j] = tab1[j + 1];
                         tab1[j + 1] = xd;
                     }
-
                 }
             }
         }
-        public void InsertSort()
+        private void InsertSort()
         {
             for (int i = 0; i < tab1.Length; i++)
             {
@@ -60,8 +63,7 @@ namespace WinFormsApp2
                 tab1[j + 1] = k;
             }
         }
-
-        public void QuickSort(int lewo, int prawo)
+        private void QuickSort(int lewo, int prawo)
         {
             int i = lewo;
             int j = prawo;
@@ -93,7 +95,76 @@ namespace WinFormsApp2
             {
                 QuickSort(i, prawo);
             }
+
         }
+        private void CountingSort()
+        {
+            int max = tab1.Max();
+            int[] tab2 = new int[max + 1];
+            for (int i = 0; i < max + 1; i++)
+            {
+                tab2[i] = 0;
+            }
+            for (int i = 0; i < tab1.Length; i++)
+            {
+                tab2[tab1[i]]++;
+            }
+            for (int i = 0, j = 0; i <= max; i++)
+            {
+                while (tab2[i] > 0)
+                {
+                    tab1[j] = i;
+                    j++;
+                    tab2[i]--;
+                }
+            }
+        }
+        private void MergeSort(int[] tab1)
+        {
+            if (tab1.Length <= 1)
+            {
+                return;
+            }
+
+            int mid = tab1.Length / 2;
+
+            int[] lewo = new int[mid];
+            int[] prawo = new int[tab1.Length - mid];
+
+            for (int i = 0; i < mid; i++)
+            {
+                lewo[i] = tab1[i];
+            }
+            for (int i = mid; i < tab1.Length; i++)
+            {
+                prawo[i - mid] = tab1[i];
+            }
+
+            MergeSort(lewo);
+            MergeSort(prawo);
+
+            Merge(tab1, lewo, prawo);
+        }
+
+        private void Merge(int[] tab1, int[] lewo, int[] prawo)
+        {
+            int i = 0, j = 0, k = 0;
+
+            while (i < lewo.Length && j < prawo.Length)
+            {
+                if (lewo[i] <= prawo[j])
+                    tab1[k++] = lewo[i++];
+                else
+                    tab1[k++] = prawo[j++];
+            }
+
+            while (i < lewo.Length)
+                tab1[k++] = lewo[i++];
+
+            while (j < prawo.Length)
+                tab1[k++] = prawo[j++];
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -142,6 +213,47 @@ namespace WinFormsApp2
         }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            GenTab(10);
+            label8.Text = ToString(tab1);
+            CountingSort();
+            label2.Text = ToString(tab1);
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            GenTab(10);
+            label10.Text= ToString(tab1);
+            MergeSort(tab1);
+            label11.Text= ToString(tab1);
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
         {
 
         }
